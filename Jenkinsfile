@@ -8,6 +8,12 @@ node {
       sh "${scannerHome}/bin/sonar-scanner"
     }
   }
+}
+
+pipeline {
+    agent any
+
+    stages {
         stage('Pull Request') {
             steps {
                 sh 'ssh -T -o StrictHostKeyChecking=no jenkins@162.55.3.153 "cd /var/www/html/development/Wintermads/Jenkins/backend && sudo git pull "'
@@ -31,70 +37,75 @@ node {
             }
         }
         stage('Alert') {
-            steps {
-              script {
-                def environmentName = " Wintermads Dev Backend"
-                def webhookUrl = "https://hooks.slack.com/services/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"
-                def gitCommit = sh(returnStdout: true, script: "git log -1 --pretty=format:'%h - %s (%an, %ae)'")
-                def gitBranch = sh(returnStdout: true, script: "git rev-parse --abbrev-ref HEAD")
-                def gitAuthor = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'")
-                def gitEmail = sh(returnStdout: true, script: "git log -1 --pretty=format:'%ae'")
-                def gitMessage = sh(returnStdout: true, script: "git log -1 --pretty=format:'%s'")
-          
-                def buildStatusText = "Build successful ✅"
-                def color = "#36a64f"
-                def changes = sh(returnStdout: true, script: "git diff --name-only HEAD HEAD~1")
-                def changesText = changes.readLines().join(', ')
-          
-                sh """
-                  curl -X POST \
-                    -H 'Content-type: application/json; charset=utf-8' \
-                    --data '{
-                      \"channel\": \"#mychannel\",
-                      \"username\": \"superbot\",
-                      \"icon_emoji\": \":bot:\",
-                      \"attachments\": [
-                        {
-                          \"color\": \"${color}\",
-                          \"text\": \"${buildStatusText}\",
-                          \"fields\": [
-                            {
-                              \"title\": \"Environment\",
-                              \"value\": \"${environmentName}\",
-                              \"short\": false
-                            },
-                            {
-                              \"title\": \"Commit\",
-                              \"value\": \"${gitCommit}\",
-                              \"short\": false
-                            },
-                            {
-                              \"title\": \"Branch\",
-                              \"value\": \"${gitBranch}\",
-                              \"short\": true
-                            },
-                            {
-                              \"title\": \"Author\",
-                              \"value\": \"${gitAuthor} <${gitEmail}>\",
-                              \"short\": true
-                            },
-                            {
-                              \"title\": \"Message\",
-                              \"value\": \"${gitMessage}\",
-                              \"short\": false
-                            },
-                            {
-                              \"title\": \"Changes\",
-                              \"value\": \"${changesText}\",
-                              \"short\": false
-                            }
-                          ]
-                        }
-                      ]
-                    }' \
-                    ${webhookUrl}
-                """
+  steps {
+    script {
+      def environmentName = " Wintermads Dev Backend"
+      def webhookUrl = "https://hooks.slack.com/services/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"
+      def gitCommit = sh(returnStdout: true, script: "git log -1 --pretty=format:'%h - %s (%an, %ae)'")
+      def gitBranch = sh(returnStdout: true, script: "git rev-parse --abbrev-ref HEAD")
+      def gitAuthor = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'")
+      def gitEmail = sh(returnStdout: true, script: "git log -1 --pretty=format:'%ae'")
+      def gitMessage = sh(returnStdout: true, script: "git log -1 --pretty=format:'%s'")
+
+      def buildStatusText = "Build successful ✅"
+      def color = "#36a64f"
+      def changes = sh(returnStdout: true, script: "git diff --name-only HEAD HEAD~1")
+      def changesText = changes.readLines().join(', ')
+
+      sh """
+        curl -X POST \
+          -H 'Content-type: application/json; charset=utf-8' \
+          --data '{
+            \"channel\": \"#mychannel\",
+            \"username\": \"superbot\",
+            \"icon_emoji\": \":bot:\",
+            \"attachments\": [
+              {
+                \"color\": \"${color}\",
+                \"text\": \"${buildStatusText}\",
+                \"fields\": [
+                  {
+                    \"title\": \"Environment\",
+                    \"value\": \"${environmentName}\",
+                    \"short\": false
+                  },
+                  {
+                    \"title\": \"Commit\",
+                    \"value\": \"${gitCommit}\",
+                    \"short\": false
+                  },
+                  {
+                    \"title\": \"Branch\",
+                    \"value\": \"${gitBranch}\",
+                    \"short\": true
+                  },
+                  {
+                    \"title\": \"Author\",
+                    \"value\": \"${gitAuthor} <${gitEmail}>\",
+                    \"short\": true
+                  },
+                  {
+                    \"title\": \"Message\",
+                    \"value\": \"${gitMessage}\",
+                    \"short\": false
+                  },
+                  {
+                    \"title\": \"Changes\",
+                    \"value\": \"${changesText}\",
+                    \"short\": false
+                  }
+                ]
               }
-            }
-          }
+            ]
+          }' \
+          ${webhookUrl}
+      """
+    }
+  }
 }
+
+
+    }
+}
+
+
