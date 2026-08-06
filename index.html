@@ -1,459 +1,729 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Hamza Arshad — DevOps Engineer</title>
+<meta name="description" content="Muhammad Hamza Arshad — DevOps Engineer specializing in CI/CD automation, container infrastructure, AWS cloud architecture and observability.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
-  <title>Hamza Arshad Khan</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<style>
+  :root{
+    --bg: #FAFAFD;
+    --surface: #FFFFFF;
+    --surface-2: #F3F3FC;
+    --ink: #14151F;
+    --ink-soft: #4A4D5C;
+    --muted: #7C7F91;
+    --line: #ECECF5;
+    --indigo: #5457E5;
+    --indigo-dark: #3E40C4;
+    --indigo-10: rgba(84,87,229,.08);
+    --coral: #FF7A59;
+    --coral-10: rgba(255,122,89,.12);
+    --teal: #14B8A6;
+    --teal-10: rgba(20,184,166,.12);
+    --sun: #FFB648;
+    --sun-10: rgba(255,182,72,.15);
+    --font-display: 'Sora', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --maxw: 1180px;
+    --r-lg: 28px;
+    --r-md: 18px;
+    --r-sm: 12px;
+  }
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--font-body);
+    line-height:1.65; overflow-x:hidden;
+  }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; cursor:pointer; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  section{ padding:130px 0; position:relative; }
+  ::selection{ background:var(--indigo); color:#fff; }
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12.5px; font-weight:600; letter-spacing:.04em; color:var(--indigo);
+    display:inline-flex; align-items:center; gap:9px; margin-bottom:18px;
+    padding:7px 16px 7px 12px; border-radius:100px; background:var(--indigo-10);
+  }
+  .eyebrow::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--indigo); }
+  h2.h-title{
+    font-family:var(--font-display); font-weight:800; font-size:clamp(30px,4vw,44px);
+    letter-spacing:-0.02em; color:var(--ink); margin-bottom:16px; max-width:680px; line-height:1.15;
+  }
+  .h-sub{ color:var(--muted); font-size:16.5px; max-width:560px; margin-bottom:60px; }
+  .accent{ color:var(--indigo); }
 
-  <!-- =======================================================
-  * Template Name: DevFolio
-  * Updated: Mar 10 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } html{ scroll-behavior:auto; } }
+
+  /* ---------- NAV ---------- */
+  header.nav{ position:fixed; top:0; left:0; right:0; z-index:1000; padding:20px 24px; transition:.3s ease; }
+  header.nav.scrolled{ padding:14px 24px; }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; display:flex; align-items:center; justify-content:space-between;
+    background:rgba(255,255,255,.85); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--line); border-radius:100px; padding:10px 12px 10px 22px;
+    box-shadow:0 10px 30px -18px rgba(20,21,31,.15); transition:.3s ease;
+  }
+  .logo{ font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--ink); display:flex; align-items:center; gap:8px; }
+  .logo .dot{ width:9px; height:9px; border-radius:50%; background:var(--coral); }
+  nav.links{ display:flex; align-items:center; gap:6px; }
+  nav.links a{ font-family:var(--font-body); font-weight:600; font-size:14px; color:var(--ink-soft); padding:9px 16px; border-radius:100px; transition:.25s; }
+  nav.links a:hover{ color:var(--indigo); background:var(--indigo-10); }
+  .nav-cta{
+    font-family:var(--font-body); font-weight:600; font-size:14px; color:#fff !important;
+    background:linear-gradient(120deg, var(--indigo), var(--indigo-dark)); padding:11px 22px !important; border-radius:100px;
+    box-shadow:0 8px 20px -6px rgba(84,87,229,.55);
+  }
+  .nav-cta:hover{ transform:translateY(-1px); box-shadow:0 10px 24px -6px rgba(84,87,229,.65); }
+  .burger{ display:none; flex-direction:column; gap:5px; background:none; border:none; padding:8px; }
+  .burger span{ width:20px; height:2px; background:var(--ink); display:block; }
+
+  /* ---------- HERO ---------- */
+  .hero{ min-height:100vh; display:flex; align-items:center; padding-top:150px; padding-bottom:60px; overflow:visible; }
+  .blob{ position:absolute; border-radius:50%; filter:blur(70px); z-index:0; opacity:.55; pointer-events:none; }
+  .blob-1{ width:480px; height:480px; background:radial-gradient(circle, var(--indigo) 0%, transparent 70%); top:-120px; right:-80px; opacity:.25; }
+  .blob-2{ width:380px; height:380px; background:radial-gradient(circle, var(--coral) 0%, transparent 70%); bottom:-100px; left:-100px; opacity:.18; }
+  .blob-3{ width:300px; height:300px; background:radial-gradient(circle, var(--sun) 0%, transparent 70%); top:40%; left:38%; opacity:.15; }
+
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:70px; align-items:center; position:relative; z-index:1; }
+  .hero-eyebrow{ display:inline-flex; align-items:center; gap:10px; font-family:var(--font-body); font-weight:600; font-size:14px; color:var(--indigo-dark); background:var(--indigo-10); padding:9px 18px 9px 12px; border-radius:100px; margin-bottom:26px; }
+  .hero-eyebrow .wave{ font-size:16px; display:inline-block; animation:wave 2.2s ease-in-out infinite; transform-origin:70% 70%; }
+  @keyframes wave{ 0%,100%{ transform:rotate(0);} 15%{ transform:rotate(16deg);} 30%{ transform:rotate(-8deg);} 45%{ transform:rotate(14deg);} 60%{ transform:rotate(0);} }
+  .hero h1{ font-family:var(--font-display); font-weight:800; letter-spacing:-0.03em; font-size:clamp(38px,5.4vw,62px); color:var(--ink); line-height:1.05; margin-bottom:20px; }
+  .hero h1 .hl{ color:var(--indigo); position:relative; display:inline-block; }
+  .hero h1 .hl svg{ position:absolute; left:0; bottom:-6px; width:100%; height:14px; }
+  .role-line{ font-family:var(--font-display); font-weight:600; font-size:clamp(18px,2.2vw,24px); color:var(--ink-soft); margin-bottom:24px; min-height:32px; display:flex; align-items:center; }
+  .role-line .rt-cursor{ display:inline-block; width:2px; height:26px; background:var(--coral); margin-left:4px; animation:blink 1s steps(1) infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .hero-desc{ color:var(--muted); font-size:17px; max-width:500px; margin-bottom:38px; }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:52px; }
+  .btn{ font-family:var(--font-body); font-weight:600; font-size:14.5px; padding:15px 28px; border-radius:100px; display:inline-flex; align-items:center; gap:9px; transition:all .3s cubic-bezier(.2,.8,.3,1); border:1.5px solid transparent; }
+  .btn-primary{ background:linear-gradient(120deg, var(--indigo), var(--indigo-dark)); color:#fff; box-shadow:0 12px 28px -8px rgba(84,87,229,.55); }
+  .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 16px 32px -6px rgba(84,87,229,.65); }
+  .btn-ghost{ border-color:var(--line); color:var(--ink); background:#fff; }
+  .btn-ghost:hover{ border-color:var(--indigo); color:var(--indigo); transform:translateY(-3px); }
+
+  .hero-socials{ display:flex; gap:12px; align-items:center; }
+  .hero-socials span{ font-family:var(--font-mono); font-size:11.5px; color:var(--muted); margin-right:4px; }
+  .hero-socials a{ width:40px; height:40px; border-radius:50%; border:1.5px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; color:var(--ink-soft); transition:.25s; }
+  .hero-socials a:hover{ color:var(--indigo); border-color:var(--indigo); transform:translateY(-3px); }
+
+  /* hero visual */
+  .hero-visual{ position:relative; display:flex; justify-content:center; }
+  .photo-block{ position:relative; width:100%; max-width:400px; }
+  .photo-bg{ position:absolute; inset:0; background:linear-gradient(135deg, var(--indigo), var(--coral)); border-radius:var(--r-lg); transform:rotate(6deg); }
+  .photo-fg{ position:relative; border-radius:var(--r-lg); overflow:hidden; border:6px solid #fff; box-shadow:0 30px 60px -20px rgba(20,21,31,.35); }
+  .photo-fg img{ width:100%; height:460px; object-fit:cover; object-position:top center; }
+
+  .float-card{
+    position:absolute; background:#fff; border-radius:16px; padding:14px 18px; display:flex; align-items:center; gap:12px;
+    box-shadow:0 20px 40px -16px rgba(20,21,31,.25); animation:floaty 4.5s ease-in-out infinite;
+  }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-10px);} }
+  .float-card.f1{ top:6%; right:-8%; animation-delay:.2s; }
+  .float-card.f2{ bottom:8%; left:-10%; animation-delay:1s; }
+  .float-card .ic{ width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .float-card .tt{ font-family:var(--font-display); font-size:14px; color:var(--ink); font-weight:700; }
+  .float-card .sb{ font-family:var(--font-body); font-size:11px; color:var(--muted); }
+
+  .stat-strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:8px; }
+  .stat{ background:#fff; border:1px solid var(--line); border-radius:var(--r-md); padding:20px 18px; box-shadow:0 8px 20px -14px rgba(20,21,31,.15); }
+  .stat .num{ font-family:var(--font-display); font-size:26px; font-weight:800; color:var(--ink); }
+  .stat .num span{ color:var(--coral); }
+  .stat .lab{ font-family:var(--font-body); font-size:11.5px; font-weight:600; color:var(--muted); margin-top:4px; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:.78fr 1.22fr; gap:70px; align-items:start; }
+  .about-photo{ position:relative; }
+  .about-photo-bg{ position:absolute; inset:0; background:linear-gradient(135deg, var(--teal), var(--indigo)); border-radius:var(--r-lg); transform:rotate(-4deg); }
+  .about-photo-fg{ position:relative; border-radius:var(--r-lg); overflow:hidden; border:6px solid #fff; box-shadow:0 24px 50px -20px rgba(20,21,31,.3); }
+  .about-photo-fg img{ width:100%; height:420px; object-fit:cover; object-position:top center; }
+  .about-copy p{ color:var(--ink-soft); margin-bottom:19px; font-size:15.5px; }
+  .about-copy p strong{ color:var(--ink); font-weight:700; }
+  .facts{ margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .fact-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-sm); padding:16px 18px; box-shadow:0 6px 16px -12px rgba(20,21,31,.15); }
+  .fact-card .fk{ font-family:var(--font-body); font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; }
+  .fact-card .fv{ font-family:var(--font-display); font-size:14px; font-weight:600; color:var(--ink); }
+  .fact-card .fv a{ color:var(--indigo); }
+  .about-actions{ margin-top:30px; display:flex; gap:16px; flex-wrap:wrap; }
+
+  /* ---------- STACK ---------- */
+  .stack-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .stack-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-md); padding:28px; transition:.3s ease; box-shadow:0 8px 24px -18px rgba(20,21,31,.2); }
+  .stack-card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px -18px rgba(20,21,31,.25); }
+  .stack-card .icwrap{ width:46px; height:46px; border-radius:13px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+  .stack-card h4{ font-family:var(--font-display); font-size:16.5px; color:var(--ink); margin-bottom:16px; font-weight:700; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{ font-family:var(--font-body); font-size:12px; font-weight:500; color:var(--ink-soft); border:1px solid var(--line); padding:6px 12px; border-radius:100px; background:var(--surface-2); }
+
+  .c-indigo{ background:var(--indigo-10); color:var(--indigo); }
+  .c-coral{ background:var(--coral-10); color:var(--coral); }
+  .c-teal{ background:var(--teal-10); color:var(--teal); }
+  .c-sun{ background:var(--sun-10); color:#C6841E; }
+
+  /* ---------- SERVICES ---------- */
+  .svc-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .svc-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-md); padding:32px 26px; transition:.3s ease; box-shadow:0 8px 24px -18px rgba(20,21,31,.2); }
+  .svc-card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px -18px rgba(20,21,31,.25); }
+  .svc-card .icwrap{ width:50px; height:50px; border-radius:14px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
+  .svc-card h3{ font-family:var(--font-display); font-size:18px; color:var(--ink); margin-bottom:10px; font-weight:700; }
+  .svc-card p{ color:var(--muted); font-size:14px; }
+  .svc-num{ font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-bottom:8px; }
+
+  /* ---------- EXPERIENCE (timeline) ---------- */
+  .timeline{ position:relative; padding-left:36px; }
+  .timeline::before{ content:''; position:absolute; left:9px; top:8px; bottom:8px; width:2px; background:linear-gradient(180deg, var(--indigo), var(--coral), var(--teal), var(--sun)); border-radius:2px; }
+  .tl-item{ position:relative; padding-bottom:44px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-dot{ position:absolute; left:-36px; top:4px; width:20px; height:20px; border-radius:50%; background:#fff; border:3px solid var(--indigo); }
+  .tl-item.current .tl-dot{ border-color:var(--coral); box-shadow:0 0 0 6px var(--coral-10); }
+  .tl-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-md); padding:26px 28px; box-shadow:0 8px 24px -18px rgba(20,21,31,.18); transition:.3s; }
+  .tl-card:hover{ transform:translateX(4px); }
+  .tl-top{ display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .tl-role{ font-family:var(--font-display); font-size:18px; color:var(--ink); font-weight:700; }
+  .tl-co{ font-family:var(--font-body); font-size:13.5px; color:var(--indigo); font-weight:600; margin-top:2px; }
+  .tl-date{ font-family:var(--font-mono); font-size:11.5px; color:#fff; background:var(--ink); padding:6px 12px; border-radius:100px; flex-shrink:0; }
+  .tl-item.current .tl-date{ background:var(--coral); }
+  .tl-card ul{ display:flex; flex-direction:column; gap:9px; }
+  .tl-card li{ font-size:14px; color:var(--ink-soft); position:relative; padding-left:18px; }
+  .tl-card li::before{ content:'✓'; position:absolute; left:0; color:var(--teal); font-weight:700; font-size:12px; top:2px; }
+
+  /* ---------- CERTS ---------- */
+  .cert-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-bottom:36px; }
+  .cert-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; transition:.3s; box-shadow:0 8px 24px -18px rgba(20,21,31,.2); }
+  .cert-card:hover{ transform:translateY(-6px); }
+  .cert-img-wrap{ background:var(--surface-2); padding:24px; }
+  .cert-img-wrap img{ border-radius:8px; box-shadow:0 10px 24px -12px rgba(20,21,31,.25); }
+  .cert-meta{ padding:20px 24px; display:flex; align-items:center; gap:14px; }
+  .cert-meta .badge-ic{ width:42px; height:42px; border-radius:12px; background:var(--sun-10); color:#C6841E; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .cert-meta h4{ font-family:var(--font-display); font-size:15px; color:var(--ink); margin-bottom:2px; font-weight:700; }
+  .cert-meta span{ font-family:var(--font-body); font-size:12.5px; color:var(--muted); }
+  .badge-row{ display:flex; flex-wrap:wrap; gap:12px; }
+  .badge{ font-family:var(--font-body); font-weight:500; font-size:13px; color:var(--ink-soft); border:1px solid var(--line); background:#fff; padding:11px 18px; border-radius:100px; box-shadow:0 6px 16px -12px rgba(20,21,31,.15); }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .quote-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .quote-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-md); padding:32px; position:relative; transition:.3s; box-shadow:0 8px 24px -18px rgba(20,21,31,.2); }
+  .quote-card:hover{ transform:translateY(-6px); }
+  .quote-card .mark{ color:var(--sun); margin-bottom:14px; }
+  .quote-card p{ color:var(--ink); font-size:15.5px; margin-bottom:22px; }
+  .quote-who{ display:flex; align-items:center; gap:12px; }
+  .quote-avatar{ width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:13px; font-weight:700; color:#fff; }
+  .quote-name{ font-family:var(--font-body); font-size:14px; color:var(--ink); font-weight:600; }
+  .quote-name small{ display:block; color:var(--muted); font-size:12px; font-weight:400; margin-top:1px; }
+
+  /* ---------- RESUME ---------- */
+  .resume-panel{
+    background:linear-gradient(120deg, var(--indigo), var(--indigo-dark)); border-radius:32px; padding:56px;
+    display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; position:relative; overflow:hidden;
+  }
+  .resume-panel::before{ content:''; position:absolute; width:260px; height:260px; background:rgba(255,255,255,.08); border-radius:50%; top:-100px; right:-60px; }
+  .resume-left{ position:relative; z-index:1; }
+  .resume-left h3{ font-family:var(--font-display); font-size:25px; color:#fff; margin-bottom:10px; font-weight:800; }
+  .resume-left p{ color:rgba(255,255,255,.85); font-size:14.5px; max-width:440px; }
+  .resume-panel .btn-primary{ background:#fff; color:var(--indigo-dark); box-shadow:0 12px 28px -8px rgba(0,0,0,.25); position:relative; z-index:1; }
+  .resume-panel .btn-primary:hover{ box-shadow:0 16px 32px -6px rgba(0,0,0,.3); }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:64px; }
+  .contact-form{ background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:40px; box-shadow:0 12px 32px -20px rgba(20,21,31,.2); }
+  .field{ margin-bottom:18px; }
+  .field label{ font-family:var(--font-body); font-weight:600; font-size:12.5px; color:var(--ink-soft); display:block; margin-bottom:8px; }
+  .field input, .field textarea{
+    width:100%; background:var(--surface-2); border:1.5px solid transparent; border-radius:var(--r-sm); padding:14px 16px;
+    color:var(--ink); font-family:var(--font-body); font-size:14px; outline:none; transition:.25s ease;
+  }
+  .field input:focus, .field textarea:focus{ border-color:var(--indigo); background:#fff; }
+  .field textarea{ resize:vertical; min-height:130px; }
+  .form-note{ font-family:var(--font-body); font-size:12px; color:var(--muted); margin-top:16px; }
+
+  .contact-info p.lead{ color:var(--ink-soft); font-size:15.5px; margin-bottom:28px; }
+  .info-list{ display:flex; flex-direction:column; gap:14px; margin-bottom:32px; }
+  .info-card{ display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--line); border-radius:var(--r-sm); padding:16px 18px; box-shadow:0 6px 16px -12px rgba(20,21,31,.15); }
+  .info-ic{ width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .info-tx{ font-family:var(--font-body); font-size:14px; color:var(--ink); font-weight:600; }
+  .social-row{ display:flex; gap:12px; }
+  .social-row a{ width:46px; height:46px; border-radius:14px; border:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; color:var(--ink-soft); transition:.25s; box-shadow:0 6px 16px -12px rgba(20,21,31,.15); }
+  .social-row a:hover{ color:#fff; background:var(--indigo); border-color:var(--indigo); transform:translateY(-4px); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ border-top:1px solid var(--line); padding:36px 0; background:#fff; }
+  .footer-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .footer-inner p{ font-family:var(--font-body); font-size:13px; color:var(--muted); }
+  .back-top{ font-family:var(--font-body); font-weight:600; font-size:13px; color:var(--ink-soft); border:1px solid var(--line); padding:10px 18px; border-radius:100px; }
+  .back-top:hover{ color:var(--indigo); border-color:var(--indigo); }
+
+  svg.i{ width:20px; height:20px; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-visual{ order:-1; margin-bottom:20px; }
+    .about-grid{ grid-template-columns:1fr; }
+    .stack-grid{ grid-template-columns:repeat(2,1fr); }
+    .svc-grid{ grid-template-columns:repeat(2,1fr); }
+    .cert-grid, .quote-grid, .contact-grid{ grid-template-columns:1fr; }
+    nav.links{ display:none; }
+    .float-card{ display:none; }
+  }
+  @media (max-width: 640px){
+    section{ padding:90px 0; }
+    .stat-strip{ grid-template-columns:repeat(2,1fr); }
+    .stack-grid, .svc-grid{ grid-template-columns:1fr; }
+    .facts{ grid-template-columns:1fr; }
+    .resume-panel{ flex-direction:column; align-items:flex-start; padding:36px 28px; }
+    .contact-form{ padding:26px; }
+    .tl-top{ flex-direction:column; }
+  }
+</style>
 </head>
-
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#hero" class="logo"><span class="dot"></span>Hamza Arshad</a>
+    <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#experience">Experience</a>
+      <a href="#certifications">Certs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Say hi 👋</a>
+  </div>
+</header>
 
-      <h1 class="logo"><a href="index.html">DevOps Engineer</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-	 <li><a class="nav-link scrollto" href="#resume">Resume</a></li>
-	 <li><a class="nav-link scrollto" href="#certification">Certification</a></li> 
-	<li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <div id="hero" class="hero route bg-image" style="background-image: url(assets/img/work-3.jpg)">
-    <div class="overlay-itro"></div>
-    <div class="hero-content display-table">
-      <div class="table-cell">
-        <div class="container">
-          <!--<p class="display-6 color-d">Hello, world!</p>-->
-          <h1 class="hero-title mb-4">I am Hamza Arshad khan </h1>
-          <p class="hero-subtitle"><span class="typed" data-typed-items="DevOps Engineer, Computer Scientist, Cloud Engineer, Freelancer"></span></p>
-          <!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> -->
-        </div>
+<!-- ================= HERO ================= -->
+<section id="hero" class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-eyebrow"><span class="wave">👋</span> Hey, I'm Hamza — nice to meet you</div>
+      <h1>DevOps engineer who keeps your <span class="hl">infrastructure</span> running smoothly.</h1>
+      <div class="role-line"><span id="typedRole">CI/CD Automation</span><span class="rt-cursor"></span></div>
+      <p class="hero-desc">Over 5 years turning fragile deployments into reliable, automated pipelines — for teams who'd rather build products than fight servers.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Let's work together</a>
+        <a href="HamzaArshadDevOps.pdf" target="_blank" rel="noopener" class="btn btn-ghost">Download résumé</a>
+      </div>
+      <div class="hero-socials">
+        <span>FIND ME ON</span>
+        <a href="https://www.linkedin.com/in/muhammad-humza-arshad-62aa8b18b" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="i" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48Z"/></svg></a>
+        <a href="https://www.facebook.com/humza.arshadkhan.3" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.5-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg></a>
+        <a href="https://instagram.com/hmzukhan_024" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
       </div>
     </div>
 
-  </div><!-- End Hero Section -->
-
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about-mf sect-pt4 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="box-shadow-full">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-sm-6 col-md-5">
-                      <div class="about-img">
-                        <img src="humzapic-min.jpeg" class="img-fluid rounded b-shadow-a" alt="">
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-md-7">
-                      <div class="about-info">
-                        <p><span class="title-s">Name: </span> <span>Hamza Arshad Khan</span></p>
-                        <p><span class="title-s">Profile: </span> <span>DevOps Engineer</span></p>
-                        <p><span class="title-s">Email: </span> <span>humza.arshad024@gmail.com</span></p>
-                        <p><span class="title-s">Phone: </span> <span>+923368330308</span></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="skill-mf">
-                    <p class="title-s">Skill</p>
-                    <span>Servers Management,Deployments & Monitoring</span> <span class="pull-right">95%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Databases (Mysql ,Postgres, MongoDb)</span> <span class="pull-right">90%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Bash Scripting ,Dockerization ,CI/CD Pipeline</span> <span class="pull-right">85%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <span>Cloud Services (Aws Certified Cloud Practitioner)</span> <span class="pull-right">90%</span>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="about-me pt-4 pt-md-0">
-                    <div class="title-box-2">
-                      <h5 class="title-left">
-                        About me
-                      </h5>
-                    </div>
-                    <p class="lead">       Skilled DevOps engineer with 3 year of experience in Development and Operation,computer scientist with strong analytical, interpersonal and organizational skills to conceive and achieve business solutions.    </p>
-                    <p class="lead">
-			With an entrepreneurial spirit and an eagerness to challenge myself, I am driven to produce exceptional results using technical proficiency, organizational abilities and clear communication skills to deliver the best technical solutions.                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="hero-visual reveal">
+      <div class="photo-block">
+        <div class="photo-bg"></div>
+        <div class="photo-fg"><img src="assets/img/humzapic-min.jpeg" alt="Portrait of Muhammad Hamza Arshad"></div>
+        <div class="float-card f1">
+          <div class="ic c-teal"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div><div class="tt">AWS Certified</div><div class="sb">×2 credentials</div></div>
+        </div>
+        <div class="float-card f2">
+          <div class="ic c-coral"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><div class="tt">5+ Years</div><div class="sb">In production</div></div>
         </div>
       </div>
-    </section><!-- End About Section -->
+    </div>
+  </div>
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services-mf pt-5 route">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="title-box text-center">
-              <h3 class="title-a">
-                Services
-              </h3>
-              <p class="subtitle-a">
-                Here is the list of services.
-              </p>
-              <div class="line-mf"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-briefcase"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Servers Management </h2>
-                <p class="s-description text-center">
-		Expertise in managing and maintaining Linux servers, including installation, configuration, monitoring, and troubleshooting of various services and applications, ensuring high availability and security of critical systems. </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-card-checklist"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Web Servers</h2>
-                <p class="s-description text-center">
-		Proficient in deploying and managing websites on Apache and Nginx servers, with expertise in SSL/TLS certificate installation, virtual host configuration, load balancing, and caching strategies to optimize site performance and security.                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-bar-chart"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Database Administration</h2>
-                <p class="s-description text-center">
-		Proficient in database administration on Linux platforms, with skills in backup and restore procedures, database optimization, performance tuning, and implementing security best practices to ensure data integrity and availability.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-binoculars"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Servers Monitoring and Alerts</h2>
-                <p class="s-description text-center">
-		Skilled in configuring and managing server monitoring tools such as Nagios, Zabbix, and Prometheus to proactively detect and resolve system issues, with expertise in setting up alerts, performance metrics, and automated responses to ensure high availability and uptime.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-brightness-high"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Code Management</h2>
-                <p class="s-description text-center">
-		Proficient in Git code management, including version control, branching, merging, and automated pull requests, with skills in setting up continuous integration/continuous deployment (CI/CD) pipelines to streamline development workflows and improve code quality.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="bi bi-calendar4-week"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Cloud Services</h2>
-                <p class="s-description text-center">
-		Certified AWS Cloud Practitioner with extensive experience in designing, deploying, and managing cloud infrastructure and services, including EC2 instances, S3 storage, RDS databases, and VPC networks, to optimize scalability, reliability, and cost-effectiveness of cloud solutions.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="wrap">
+    <div class="stat-strip reveal">
+      <div class="stat"><div class="num"><span>5</span>+</div><div class="lab">Years Experience</div></div>
+      <div class="stat"><div class="num">2</div><div class="lab">AWS Certifications</div></div>
+      <div class="stat"><div class="num">4</div><div class="lab">Companies Served</div></div>
+      <div class="stat"><div class="num">20<span>+</span></div><div class="lab">Tools &amp; Platforms</div></div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">ABOUT ME</div>
+    <h2 class="h-title reveal">Infrastructure is the product nobody sees — until it breaks.</h2>
+    <p class="h-sub reveal">I make sure it doesn't.</p>
+
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <div class="about-photo-bg"></div>
+        <div class="about-photo-fg"><img src="assets/img/pp.jpeg" alt="Muhammad Hamza Arshad"></div>
       </div>
-    </section><!-- End Services Section -->
+      <div class="about-copy reveal">
+        <p>I'm a <strong>Senior DevOps Engineer</strong> with over 5 years of experience automating the path from code to production. My work sits at the intersection of development and operations: building CI/CD pipelines, containerizing applications, provisioning cloud infrastructure, and keeping a close eye on everything once it ships.</p>
+        <p>Across four teams — from startups to established agencies — I've deployed and maintained PHP, Laravel, WordPress, Node.js, NestJS and React applications on AWS and Ubuntu servers, backed by monitoring stacks like ELK, Zabbix and Grafana so issues get caught before users notice them.</p>
+        <p>I hold a <strong>Bachelor's in Computer Science</strong> from the University of Management &amp; Technology, and I'm <strong>AWS Certified</strong> as both a Cloud Practitioner and Solutions Architect Associate.</p>
 
-    <!-- ======= Counter Section ======= -->
-
-<!-- ======= Resume Section ======= -->
-<section id="resume" class="resume-mf sect-pt4 route">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="box-shadow-full">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="title-box-2">
-                <h5 class="title-left">
-                  Resume
-                </h5>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="download-button text-md-right">
-                <a class="button button-a button-big button-rouded" href="HamzaArshadDevOps.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
-              </div>
-            </div>
-          </div>
-          <object data="HamzaArshadDevOps.pdf" type="application/pdf" width="100%" height="200%">
-            <p>It appears you don't have a PDF plugin for this browser. No biggie... you can <a href="HamzaArshadDevOps.pdf" target="_blank" rel="noopener noreferrer">click here to download the PDF file.</a></p>
-          </object>
+        <div class="facts">
+          <div class="fact-card"><div class="fk">Name</div><div class="fv">Muhammad Hamza Arshad</div></div>
+          <div class="fact-card"><div class="fk">Role</div><div class="fv">Senior DevOps Engineer</div></div>
+          <div class="fact-card"><div class="fk">Location</div><div class="fv">Lahore, Pakistan</div></div>
+          <div class="fact-card"><div class="fk">Email</div><div class="fv"><a href="mailto:humza.arshad024@gmail.com">humza.arshad024@gmail.com</a></div></div>
+        </div>
+        <div class="about-actions">
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
+          <a href="#experience" class="btn btn-ghost">View experience</a>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End Resume Section -->
-<!-- ======= Certification Section ======= -->
-<section class="resume-section" id="certification">
-    <div class="resume-section-content">
-        <h2 class="mb-5 text-center">Certification</h2>
-        <div class="d-flex justify-content-center mb-5">
-            <div class="certification mr-5">
-                <h3 class="mb-3">AWS Certified Cloud Practitioner</h3>
-                <img src="aws.png" alt="AWS Certified Cloud Practitioner Certificate" style="width: 80%; max-width: 600px;">
-            </div>
-            <div class="certification">
-                <h3 class="mb-3">AWS Certified Solutions Architect - Associate</h3>
-                <img src="solutionarchitect.png" alt="Docker Training Course for Beginners Certificate" style="width: 80%; max-width: 600px;">
-            </div>
-        </div>
+
+<!-- ================= STACK ================= -->
+<section id="stack" style="background:var(--surface-2);">
+  <div class="wrap">
+    <div class="eyebrow">TOOLBOX</div>
+    <h2 class="h-title reveal">The stack I operate in daily.</h2>
+    <p class="h-sub reveal">Six areas, one goal: ship reliably, recover fast, sleep at night.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card reveal">
+        <div class="icwrap c-indigo"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
+        <h4>Containers &amp; Orchestration</h4>
+        <div class="chip-row"><span class="chip">Docker</span><span class="chip">Docker Compose</span><span class="chip">Kubernetes</span><span class="chip">ECS Fargate</span><span class="chip">ECR</span></div>
+      </div>
+      <div class="stack-card reveal">
+        <div class="icwrap c-coral"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></div>
+        <h4>CI/CD &amp; Automation</h4>
+        <div class="chip-row"><span class="chip">GitHub Actions</span><span class="chip">Jenkins</span><span class="chip">GitLab CI</span><span class="chip">SonarQube</span><span class="chip">Ansible</span><span class="chip">Terraform</span></div>
+      </div>
+      <div class="stack-card reveal">
+        <div class="icwrap c-sun"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h.79a4.5 4.5 0 1 1 0 9Z"/></svg></div>
+        <h4>Cloud &amp; Infrastructure</h4>
+        <div class="chip-row"><span class="chip">AWS EC2</span><span class="chip">S3</span><span class="chip">VPC</span><span class="chip">Route53</span><span class="chip">CloudWatch</span><span class="chip">SSM Parameter Store</span></div>
+      </div>
+      <div class="stack-card reveal">
+        <div class="icwrap c-teal"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h4>Observability &amp; Monitoring</h4>
+        <div class="chip-row"><span class="chip">ELK Stack</span><span class="chip">Grafana</span><span class="chip">Zabbix</span><span class="chip">Nagios</span><span class="chip">Sentry</span></div>
+      </div>
+      <div class="stack-card reveal">
+        <div class="icwrap c-indigo"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+        <h4>Databases</h4>
+        <div class="chip-row"><span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span></div>
+      </div>
+      <div class="stack-card reveal">
+        <div class="icwrap c-coral"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><line x1="6" y1="7" x2="6.01" y2="7"/><line x1="6" y1="17" x2="6.01" y2="17"/></svg></div>
+        <h4>Systems &amp; Networking</h4>
+        <div class="chip-row"><span class="chip">Linux (Ubuntu/CentOS)</span><span class="chip">Nginx</span><span class="chip">Apache</span><span class="chip">IPTables</span><span class="chip">Shell Scripting</span><span class="chip">Git</span></div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- End Certification Section -->
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow">SERVICES</div>
+    <h2 class="h-title reveal">What I bring to a team.</h2>
+    <p class="h-sub reveal">Six ways I typically get pulled into a project.</p>
 
-    <!-- ======= Testimonials Section ======= -->
-    <div class="testimonials paralax-mf bg-image" style="background-image: url(assets/img/overlay-bg.jpg)">
-      <div class="overlay-mf"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
+    <div class="svc-grid">
+      <div class="svc-card reveal">
+        <div class="icwrap c-indigo"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><line x1="6" y1="7" x2="6.01" y2="7"/><line x1="6" y1="17" x2="6.01" y2="17"/></svg></div>
+        <div class="svc-num">01</div>
+        <h3>Server Management</h3>
+        <p>Installing, configuring, monitoring and troubleshooting Linux servers so critical systems stay available and secure.</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="icwrap c-coral"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></div>
+        <div class="svc-num">02</div>
+        <h3>Web Servers</h3>
+        <p>Deploying on Apache and Nginx with SSL/TLS, virtual hosts, load balancing and caching tuned for performance.</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="icwrap c-sun"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+        <div class="svc-num">03</div>
+        <h3>Database Administration</h3>
+        <p>Backup and restore procedures, optimization and performance tuning across MySQL, PostgreSQL and MongoDB.</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="icwrap c-teal"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <div class="svc-num">04</div>
+        <h3>Monitoring &amp; Alerts</h3>
+        <p>Configuring Nagios, Zabbix and Prometheus-style monitoring with alerts and automated responses for uptime.</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="icwrap c-indigo"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/><circle cx="18" cy="6" r="3"/></svg></div>
+        <div class="svc-num">05</div>
+        <h3>Code Management</h3>
+        <p>Version control, branching strategy and CI/CD pipelines that streamline workflows and protect code quality.</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="icwrap c-coral"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h.79a4.5 4.5 0 1 1 0 9Z"/></svg></div>
+        <div class="svc-num">06</div>
+        <h3>Cloud Services</h3>
+        <p>Designing and managing AWS infrastructure — EC2, S3, RDS, VPC — for scalable, cost-effective deployments.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-              <div class="swiper-wrapper">
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience" style="background:var(--surface-2);">
+  <div class="wrap">
+    <div class="eyebrow">EXPERIENCE</div>
+    <h2 class="h-title reveal">Where I've worked.</h2>
+    <p class="h-sub reveal">Four roles, one continuous climb toward more ownership.</p>
 
-                <div class="swiper-slide">
-                  <div class="testimonial-box">
-                    <div class="author-test">
-                      <img src="assets/img/testimonial-2.jpg" alt="" class="rounded-circle b-shadow-a">
-                      <span class="author">Zartash Aslam</span>
-                    </div>
-                    <div class="content-test">
-                      <p class="description lead">
-                        Hamza Arshad is a highly skilled DevOps Engineer who consistently delivers exceptional results and brings a positive attitude to every project.
-                      </p>
-                    </div>
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="testimonial-box">
-                    <div class="author-test">
-                      <img src="assets/img/testimonial-4.jpg" alt="" class="rounded-circle b-shadow-a">
-                      <span class="author">Hussain Qadir</span>
-                    </div>
-                    <div class="content-test">
-                      <p class="description lead">
-                        Hamza Arshad is a reliable and efficient DevOps Engineer who takes pride in his work and goes above and beyond to ensure project success.
-                      </p>
-                    </div>
-                  </div>
-                </div><!-- End testimonial item -->
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-
-            <!-- <div id="testimonial-mf" class="owl-carousel owl-theme">
-          
-        </div> -->
-          </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top"><div><div class="tl-role">DevOps Intern</div><div class="tl-co">Programmers Force</div></div><div class="tl-date">06/2021 – 08/2021</div></div>
+          <ul>
+            <li>Trained on DevOps and cloud computing fundamentals</li>
+            <li>Learned Docker, containerized environments and version control with Git</li>
+            <li>Studied CI/CD fundamentals and basics of Ansible &amp; Terraform</li>
+          </ul>
         </div>
       </div>
-    </div><!-- End Testimonials Section -->
-
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="paralax-mf footer-paralax bg-image sect-mt4 route" style="background-image: url(assets/img/overlay-bg.jpg)">
-      <div class="overlay-mf"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="contact-mf">
-              <div id="contact" class="box-shadow-full">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="title-box-2">
-                      <h5 class="title-left">
-                        Send Message Us
-                      </h5>
-                    </div>
-                    <div>
-                      <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                        <div class="row">
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                            </div>
-                          </div>
-                          <div class="col-md-12 text-center my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                          </div>
-                          <div class="col-md-12 text-center">
-                            <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="title-box-2 pt-4 pt-md-0">
-                      <h5 class="title-left">
-                        Get in Touch
-                      </h5>
-                    </div>
-                    <div class="more-info">
-                      <p class="lead">
-
-Are you looking to streamline your software delivery pipeline and improve the reliability of your applications? 
-As a DevOps engineer, I offer a range of services that can help you achieve these goals.
-If you're ready to take your software delivery to the next level, get in touch today and let's discuss how I can help you achieve your goals.                      
-</p>
-                      <ul class="list-ico">
-                        <li><span class="bi bi-geo-alt"></span> Wapda Town Lahore </li>
-                        <li><span class="bi bi-phone"></span> +923368330308</li>
-                        <li><span class="bi bi-envelope"></span> humza.arshad024@gmail.com</li>
-                      </ul>
-                    </div>
-                    <div class="socials">
-			<ul>
-    			<li><a href="https://www.facebook.com/humza.arshadkhan.3?mibextid=ZbWKwL"><span class="ico-circle"><i class="bi bi-facebook"></i></span></a></li>
-    			<li><a href="https://instagram.com/hmzukhan_024?igshid=MzNlNGNkZWQ4Mg=="><span class="ico-circle"><i class="bi bi-instagram"></i></span></a></li>
-    			<li><a href="https://www.twitter.com/yourprofile"><span class="ico-circle"><i class="bi bi-twitter"></i></span></a></li>
-    			<li><a href="https://www.linkedin.com/in/muhammad-humza-arshad-62aa8b18b"><span class="ico-circle"><i class="bi bi-linkedin"></i></span></a></li>
- 			 </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top"><div><div class="tl-role">Associate DevOps Engineer</div><div class="tl-co">Galaxy Solutions ITC · Lahore</div></div><div class="tl-date">08/2021 – 12/2022</div></div>
+          <ul>
+            <li>Deployed Odoo and Traccar systems end-to-end for clients</li>
+            <li>Managed MySQL/PostgreSQL backups, restores and optimization</li>
+            <li>Ran AWS EC2 Linux servers with Route53, S3 and CloudWatch</li>
+            <li>Containerized Laravel &amp; WordPress deployments with Docker</li>
+          </ul>
         </div>
       </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="copyright-box">
-            <div class="credits">
-              <!--
-              All the links in the footer should remain intact.
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=DevFolio
-            -->
-              Designed by <a href="https://bootstrapmade.com/">Muhammad Hamza Arshad</a>
-            </div>
-          </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top"><div><div class="tl-role">DevOps Engineer</div><div class="tl-co">Developers Studio Pvt Ltd · Lahore</div></div><div class="tl-date">12/2022 – 07/2025</div></div>
+          <ul>
+            <li>Containerized React.js and Node.js apps for scalable deployment</li>
+            <li>Stood up the ELK Stack with Beats for system log monitoring</li>
+            <li>Provisioned AWS infra with Terraform — EC2, VPC, ALBs, ECS</li>
+            <li>Integrated SonarQube with Jenkins; monitored with Zabbix &amp; Sentry</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item current reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top"><div><div class="tl-role">DevOps Engineer</div><div class="tl-co">CCJK Technologies</div></div><div class="tl-date">07/2025 – Present</div></div>
+          <ul>
+            <li>Optimized multi-stage Dockerfiles for PHP 8.3 (FPM) apps</li>
+            <li>Built CI/CD on GitHub Actions with AWS SSM Parameter Store</li>
+            <li>Automated Docker builds and ECR deployments end-to-end</li>
+            <li>Runs PHP, WordPress, Vtiger CRM &amp; NestJS on AWS/Ubuntu</li>
+          </ul>
         </div>
       </div>
     </div>
-  </footer><!-- End  Footer -->
+  </div>
+</section>
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!-- ================= CERTIFICATIONS ================= -->
+<section id="certifications">
+  <div class="wrap">
+    <div class="eyebrow">CERTIFICATIONS</div>
+    <h2 class="h-title reveal">Credentials on record.</h2>
+    <p class="h-sub reveal">Verified AWS certifications, plus additional training completed along the way.</p>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <div class="cert-img-wrap"><img src="assets/img/aws.png" alt="AWS Certified Cloud Practitioner certificate"></div>
+        <div class="cert-meta">
+          <div class="badge-ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div><h4>AWS Certified Cloud Practitioner</h4><span>Amazon Web Services</span></div>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-img-wrap"><img src="assets/img/solutionarchitect.png" alt="AWS Certified Solutions Architect Associate certificate"></div>
+        <div class="cert-meta">
+          <div class="badge-ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div><h4>AWS Certified Solutions Architect – Associate</h4><span>Amazon Web Services</span></div>
+        </div>
+      </div>
+    </div>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+    <div class="badge-row reveal">
+      <span class="badge">🐳 Docker Training Course for Beginners</span>
+      <span class="badge">🔌 Cisco Certified Network Associate (CCNA)</span>
+      <span class="badge">☁️ DevOps Engineer — Basics of Cloud Computing</span>
+    </div>
+  </div>
+</section>
 
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials" style="background:var(--surface-2);">
+  <div class="wrap">
+    <div class="eyebrow">TESTIMONIALS</div>
+    <h2 class="h-title reveal">What people say after working with me.</h2>
+    <p class="h-sub reveal">A couple of notes from colleagues.</p>
+
+    <div class="quote-grid">
+      <div class="quote-card reveal">
+        <svg class="mark" width="30" height="24" viewBox="0 0 30 24" fill="currentColor"><path d="M0 24V13.5C0 6 4.5 1.5 12 0l1.5 3C9 4.5 6 7.5 6 12h6v12H0Zm16.5 0V13.5C16.5 6 21 1.5 28.5 0L30 3c-4.5 1.5-7.5 4.5-7.5 9h6v12h-12Z"/></svg>
+        <p>Hamza Arshad is a highly skilled DevOps Engineer who consistently delivers exceptional results and brings a positive attitude to every project.</p>
+        <div class="quote-who">
+          <div class="quote-avatar" style="background:linear-gradient(135deg, var(--indigo), var(--coral));">ZA</div>
+          <div class="quote-name">Zartash Aslam<small>Colleague</small></div>
+        </div>
+      </div>
+      <div class="quote-card reveal">
+        <svg class="mark" width="30" height="24" viewBox="0 0 30 24" fill="currentColor"><path d="M0 24V13.5C0 6 4.5 1.5 12 0l1.5 3C9 4.5 6 7.5 6 12h6v12H0Zm16.5 0V13.5C16.5 6 21 1.5 28.5 0L30 3c-4.5 1.5-7.5 4.5-7.5 9h6v12h-12Z"/></svg>
+        <p>Hamza Arshad is a reliable and efficient DevOps Engineer who takes pride in his work and goes above and beyond to ensure project success.</p>
+        <div class="quote-who">
+          <div class="quote-avatar" style="background:linear-gradient(135deg, var(--teal), var(--indigo));">HQ</div>
+          <div class="quote-name">Hussain Qadir<small>Colleague</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESUME ================= -->
+<section id="resume">
+  <div class="wrap">
+    <div class="resume-panel reveal">
+      <div class="resume-left">
+        <h3>Want the full breakdown?</h3>
+        <p>Full work history, education and skills in one PDF — good for sharing with your team or keeping on file.</p>
+      </div>
+      <a href="HamzaArshadDevOps.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download résumé</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" style="background:var(--surface-2);">
+  <div class="wrap">
+    <div class="eyebrow">CONTACT</div>
+    <h2 class="h-title reveal">Let's talk infrastructure.</h2>
+    <p class="h-sub reveal">Looking to streamline your delivery pipeline or improve reliability? Send a message — I read every one.</p>
+
+    <div class="contact-grid">
+      <form class="contact-form reveal" id="contactForm">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+        </div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="field">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Let's build something reliable" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-note">Opens your email client, addressed to humza.arshad024@gmail.com — nothing is sent from this page directly.</p>
+      </form>
+
+      <div class="contact-info reveal">
+        <p class="lead">Whether it's a full CI/CD overhaul, a cloud migration, or getting monitoring in place before something breaks — I'm happy to talk it through.</p>
+        <div class="info-list">
+          <div class="info-card"><div class="info-ic c-indigo"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="info-tx">Lahore, Pakistan</div></div>
+          <div class="info-card"><div class="info-ic c-coral"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z"/></svg></div><div class="info-tx">+923368330308</div></div>
+          <div class="info-card"><div class="info-ic c-teal"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 6-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div><div class="info-tx">humza.arshad024@gmail.com</div></div>
+        </div>
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/muhammad-humza-arshad-62aa8b18b" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="i" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48Z"/></svg></a>
+          <a href="https://www.facebook.com/humza.arshadkhan.3" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.5-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg></a>
+          <a href="https://instagram.com/hmzukhan_024" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>© <span id="year"></span> Muhammad Hamza Arshad — built with care, deployed with confidence.</p>
+    <a href="#hero" class="back-top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // nav scroll shrink
+  const navEl = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // mobile nav toggle
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  if(burger){
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  }
+
+  // typewriter role rotator
+  const roles = ["CI/CD Automation", "Cloud Infrastructure", "Container Orchestration", "Site Reliability"];
+  const typedEl = document.getElementById('typedRole');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!reduceMotion){
+    let ri = 0, ci = 0, deleting = false;
+    function tick(){
+      const word = roles[ri];
+      if(!deleting){
+        ci++;
+        typedEl.textContent = word.slice(0, ci);
+        if(ci === word.length){ deleting = true; setTimeout(tick, 1600); return; }
+      } else {
+        ci--;
+        typedEl.textContent = word.slice(0, ci);
+        if(ci === 0){ deleting = false; ri = (ri+1) % roles.length; }
+      }
+      setTimeout(tick, deleting ? 32 : 62);
+    }
+    setTimeout(tick, 600);
+  }
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // contact form -> mailto
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    window.location.href = `mailto:humza.arshad024@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
 </body>
-
 </html>
-
